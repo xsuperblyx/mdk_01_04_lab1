@@ -5,7 +5,6 @@ using namespace std;
 class SqrMatrix
 {
 private:
-	double** result;
 	double** matrix;
 	double** matrix2;
 	double** matrixres;
@@ -22,13 +21,11 @@ public:
 		matrix = new double* [size];
 		matrix2 = new double* [size];
 		matrixres = new double* [size];
-		result = new double* [size];
 		for (int i = 0; i < size; i++)
 		{
 			matrix[i] = new double[size];
 			matrix2[i] = new double[size];
 			matrixres[i] = new double[size];
-			result[i] = new double[size];
 		}
 		for (int i = 0; i < size; i++)
 		{
@@ -99,7 +96,7 @@ public:
 		{
 			for (int j = 0; j < size; j++)
 			{
-				result[i][j] = matrix[i][j] * scalar;
+				matrixres[i][j] = matrix[i][j] * scalar;
 			}
 		}
 		cout << "Результат умножения матрицы на скаляр:" << endl;
@@ -107,7 +104,7 @@ public:
 		{
 			for (int j = 0; j < size; j++)
 			{
-				cout << result[i][j] << " ";
+				cout << matrixres[i][j] << " ";
 			}
 			cout << endl;
 		}
@@ -215,6 +212,14 @@ public:
 			cout << endl;
 		}
 	}
+
+	~SqrMatrix() // деструктор с освобождением памяти
+	{
+		delete[] matrix;
+		delete[] matrix2;
+		delete[] matrixres;
+	}
+
 };
 
 
