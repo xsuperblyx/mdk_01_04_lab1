@@ -41,8 +41,6 @@ public:
 
 	void Fillmatrix() // заполнение матриц
 	{
-		cout << "1) Генерация матриц" << endl;
-
 		//первая матрица
 		for (int i = 0; i < size; i++)
 		{
@@ -61,36 +59,13 @@ public:
 			}
 		}
 
-		cout << "Сгенерированные матрицы размером " << size << "x" << size << ":" << endl;
-
-		//вывод первой матрицы
-		for (int i = 0; i < size; i++)
-		{
-			for (int j = 0; j < size; j++)
-			{
-				cout << matrix[i][j] << " ";
-			}
-			cout << endl;
-		}
-		cout << endl;
-
-		// вывод второй матрицы
-		for (int i = 0; i < size; i++)
-		{
-			for (int j = 0; j < size; j++)
-			{
-				cout << matrix2[i][j] << " ";
-			}
-			cout << endl;
-		}
+		Print(size, matrix);
+		Print(size, matrix2);
 	}
 
 	void Scalarmult() // умножение на скаляр
 	{
 		double scalar;
-		cout << endl;
-		cout << "2) Умножение матрицы на скаляр" << endl;
-		cout << "Умножить матрицу на:" << endl;
 		cin >> scalar;
 		for (int i = 0; i < size; i++)
 		{
@@ -99,21 +74,11 @@ public:
 				matrixres[i][j] = matrix[i][j] * scalar;
 			}
 		}
-		cout << "Результат умножения матрицы на скаляр:" << endl;
-		for (int i = 0; i < size; i++)
-		{
-			for (int j = 0; j < size; j++)
-			{
-				cout << matrixres[i][j] << " ";
-			}
-			cout << endl;
-		}
+		Print(size, matrixres);
 	}
 
 	void Matrixmult() // умножжение матриц
 	{
-		cout << endl;
-		cout << "3) Умножение матриц" << endl;
 		for (int i = 0; i < size; i++)
 		{
 			for (int j = 0; j < size; j++)
@@ -124,23 +89,11 @@ public:
 				}
 			}
 		}
-
-		// вывод 
-		cout << "Результат умножения:" << endl;
-		for (int i = 0; i < size; i++)
-		{
-			for (int j = 0; j < size; j++)
-			{
-				cout << matrixres[i][j] << " ";
-			}
-			cout << endl;
-		}
+		Print(size, matrixres);
 	}
 
 	void Matrixsum() // сложение матриц
 	{
-		cout << endl;
-		cout << "4) Сложение матриц" << endl;
 		for (int i = 0; i < size; i++)
 		{
 			for (int j = 0; j < size; j++)
@@ -148,23 +101,11 @@ public:
 					matrixres[i][j] = matrix[i][j] + matrix2[i][j];
 			}
 		}
-
-		// вывод 
-		cout << "Результат сложения:" << endl;
-		for (int i = 0; i < size; i++)
-		{
-			for (int j = 0; j < size; j++)
-			{
-				cout << matrixres[i][j] << " ";
-			}
-			cout << endl;
-		}
+		Print(size, matrixres);
 	}
 
 	void Matrixsub() // вычитание матриц
 	{
-		cout << endl;
-		cout << "5) Вычитание матриц" << endl;
 		for (int i = 0; i < size; i++)
 		{
 			for (int j = 0; j < size; j++)
@@ -172,23 +113,11 @@ public:
 				matrixres[i][j] = matrix[i][j] - matrix2[i][j];
 			}
 		}
-
-		// вывод 
-		cout << "Результат вычитания:" << endl;
-		for (int i = 0; i < size; i++)
-		{
-			for (int j = 0; j < size; j++)
-			{
-				cout << matrixres[i][j] << " ";
-			}
-			cout << endl;
-		}
+		Print(size, matrixres);
 	}
 
 	void Matrixdiv() // деление матриц
 	{
-		cout << endl;
-		cout << "6) Деление матриц" << endl;
 		for (int i = 0; i < size; i++)
 		{
 			for (int j = 0; j < size; j++)
@@ -200,17 +129,7 @@ public:
 				}
 			}
 		}
-
-		// вывод 
-		cout << "Результат деления:" << endl;
-		for (int i = 0; i < size; i++)
-		{
-			for (int j = 0; j < size; j++)
-			{
-				cout << matrixres[i][j] << " ";
-			}
-			cout << endl;
-		}
+		Print(size, matrixres);
 	}
 
 	~SqrMatrix() // деструктор с освобождением памяти
@@ -218,6 +137,19 @@ public:
 		delete[] matrix;
 		delete[] matrix2;
 		delete[] matrixres;
+	}
+
+	void Print(int s, double ** mtrx)
+	{
+		for (int i = 0; i < s; i++)
+		{
+			for (int j = 0; j < s; j++)
+			{
+				cout << mtrx[i][j] << " ";
+			}
+			cout << endl;
+		}
+		cout << endl;
 	}
 
 };
@@ -228,10 +160,22 @@ void main()
 	setlocale(0, "RUSSIAN");
 	SqrMatrix mat(5);
 	mat.Creatematrix();
+	cout << "1) Генерация матриц" << endl;
+	cout << "Сгенерированные матрицы размером " << 5 << "x" << 5 << ":" << endl;
 	mat.Fillmatrix();
+	cout << "2) Умножение матрицы на скаляр" << endl;
+	cout << "Умножить матрицу на: ";
 	mat.Scalarmult();
+	cout << "3) Умножение матриц" << endl;
+	cout << "Результат умножения матриц:" << endl;
 	mat.Matrixmult();
+	cout << "4) Сложение матриц" << endl;
+	cout << "Результат сложения матриц:" << endl;
 	mat.Matrixsum();
+	cout << "5) Вычитание матриц" << endl;
+	cout << "Результат вычитания:" << endl;
 	mat.Matrixsub();
+	cout << "6) Деление матриц" << endl;
+	cout << "Результат деления:" << endl;
 	mat.Matrixdiv();
 }
